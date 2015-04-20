@@ -1,26 +1,25 @@
 <?php
-if(!isset($_SESSION) || is_null($_SESSION)) {
+if(!isset($_SESSION)) {
 	session_start();
 }
-require_once('thewall_connection.php');
-
-if(isset($_POST['action']) && $_POST['action'] == 'register') {
+// var_dump($_SESSION);
+require('thewall_connection.php');
+// var_dump($_POST);
+if((isset($_POST['action']) && $_POST['action'] == 'register')) {
 	register_user($_POST);
 }
-else if(isset($_POST['action']) && $_POST['action'] == 'login') {
+else if((isset($_POST['action']) && $_POST['action'] == 'login')) {
 	login_user($_POST);
 }
-else if(isset($_POST['action']) && $_POST['action'] == 'post_message') {
+else if((isset($_POST['action']) && $_POST['action'] == 'logout')) {
+	logout_user();
+}
+else if((isset($_POST['action']) && $_POST['action'] == 'post_message')) {
 	post_message($_POST);
 }
-else if(isset($_POST['action']) && $_POST['action'] == 'post_comment') {
+else if((isset($_POST['action']) && $_POST['action'] == 'post_comment')) {
 	post_comment($_POST);
 }
-// else { // malicious navigation or someone trying to log off
-// 	session_destroy();
-// 	header("Location: thewall_index.php");
-// 	die();
-// }
 
 function register_user($post) {
 	//-------------- begin validation checks --------------
@@ -77,10 +76,16 @@ function login_user($post) {
 	}
 }
 
+function logout_user() {
+	session_destroy();
+	header("Location: thewall_index.php");
+	die();
+}
+
 function fetch_all_messages () {
 	$query = "SELECT messages.id, first_name, last_name, message, messages.created_at FROM messages 
 			LEFT JOIN users ON messages.user_id = users.id 
-			ORDER BY created_at ASC";
+			ORDER BY created_at DESC";
 	return fetch($query);
 }
 
