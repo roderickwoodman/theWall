@@ -116,49 +116,15 @@ include('thewall_process.php');
 				if (count($msg_records) == 0) {
 					echo "<li class='error'>ERROR: no msg records found</li>";
 				}
-				else if (count($msg_records) == 1) {
-					foreach ($msg_records as $message) {
-						echo "<li>";
-						echo "<p class='message_meta'>{$msg_records['first_name']} {$msg_records['last_name']} - {$msg_records['created_at']}</p>";
-						echo "<p class='message_text'>{$msg_records['message']}";
-						echo "</li>";
-						// FIXME: THIS CODE WILL NOT CHECK COMMENTS IF MESSAGES ARE ONE?
-					}
-				}
-				else if (count($msg_records) >= 2) {
+				else if (count($msg_records) >= 1) {
 					foreach ($msg_records as $msg_key => $message) {
 						echo "<li>";
 						echo "<p class='message_meta'>{$msg_records[$msg_key]['first_name']} {$msg_records[$msg_key]['last_name']} - {$msg_records[$msg_key]['created_at']}</p>";
 						echo "<p class='message_text'>{$msg_records[$msg_key]['message']}";
 						$com_records = fetch_all_comments($message['id']);
-						// echo "<h1>ALL COMMENTS FETCHED</h1>";
-						// var_dump($com_records);
-						// die();
-						// NO MATCHES
-						if (is_null($com_records)) {
-							continue;
-						}
 						echo "<ul>";
-						// ONE MATCH => 1-D associative array
-						if (isset($com_records['id'])) {
-							foreach ($com_records as $comment) {
-								echo "ONE COMMENT RECORD!!<br>";
-								// die();
-								echo "<li class='indent'>";
-								echo "<p class='comment_meta'>{$com_records['first_name']} {$com_records['last_name']} - {$com_records['created_at']}</p>";
-								echo "<p class='comment_text'>{$com_records['comment']}";
-								echo "</li>";
-							}
-						}
-						// TWO+ MATCHES => array of associative arrays
-						else {
-							echo "TWO+ COMMENT RECORDS!!<br>";
-							// die();
-							// var_dump($com_records);
+						if (count($com_records) >= 1) {
 							foreach ($com_records as $com_key => $comment) {
-								// echo "<h1>ALL COMMENTS for com_key=".$com_key."</h1>";
-								// var_dump($com_records);
-								// die();
 								echo "<li class='indent'>";
 								echo "<p class='comment_meta'>{$com_records[$com_key]['first_name']} {$com_records[$com_key]['last_name']} - {$com_records[$com_key]['created_at']}</p>";
 								echo "<p class='comment_text'>{$com_records[$com_key]['comment']}";
@@ -168,7 +134,7 @@ include('thewall_process.php');
 						echo "</ul>";
 						add_comment_box($msg_records[$msg_key]['id']);
 						echo "</li>";
-					} // end foreach messages
+					}
 				}
 				?>
 			</ul>

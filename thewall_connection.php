@@ -30,7 +30,7 @@ function fetch($query)
 
 	if($result !== false) {
 		// if many results
-		if($result->num_rows > 1) {
+		if($result->num_rows > 0) {
 			foreach($result as $row){
 				$data[] = $row;
 			}

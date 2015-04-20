@@ -62,9 +62,9 @@ function login_user($post) {
 	          AND users.email = '{$post['email']}'";
 	$user = fetch($query);
 	if(count($user) > 0) {
-		$_SESSION['user_id'] = $user['id'];
-		$_SESSION['first_name'] = $user['first_name'];
-		$_SESSION['last_name'] = $user['last_name'];
+		$_SESSION['user_id'] = $user[0]['id'];
+		$_SESSION['first_name'] = $user[0]['first_name'];
+		$_SESSION['last_name'] = $user[0]['last_name'];
 		$_SESSION['logged_in'] = TRUE;
 		header("Location: thewall_wall.php");
 		die();
