@@ -82,6 +82,32 @@ function logout_user() {
 	die();
 }
 
+function add_header_region() {
+
+	$style_header = "min-height:50px; background-color:rgb(216,219,212); border-bottom: 5px solid black; margin-bottom:30px; padding:10px;";
+	$style_header_title = "width:30%; text-align:left; display:inline-block; padding: 5px 10px; font-weight:700; font-size:1.5em";
+	$style_header_user = "width: 55%; text-align:right; vertical-align:bottom; display: inline-block; padding: 0 15px 3px 5px;";
+	$style_header_form = "display:inline-block; width: 10%;";
+
+	echo '<div id="header" style="'.$style_header.'">';
+		echo '<p id="header_title" style="'.$style_header_title.'">CodingDojo Wall</p>';
+		if ( isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == 'TRUE') ) {
+			echo '<p id="header_user" style="'.$style_header_user.'">Welcome, '.$_SESSION['first_name'].'</p>';
+			echo '<form action="thewall_process.php" action="thewall_process.php" method="post" style="'.$style_header_form.'">';
+				echo '<input type="hidden" name="action" value="logout">';
+				echo '<input type="submit" value="log out">';
+			echo '</form>';
+		}
+	echo '</div>';
+}
+
+		#header {style="background-color:rgb(216,219,212); border-bottom: 5px solid black; margin-bottom:30px; padding:10px;"}
+		#header_title {style="width:30%; text-align:left; display:inline-block; padding: 5px 10px; font-weight:700; font-size:1.5em;"}
+		#header_user {style="width: 55%; text-align:right; vertical-align:bottom; display: inline-block; padding: 0 5px 12px 5px;"}
+		#header form {style="display:inline-block; width: 10%;"}
+
+
+
 function fetch_all_messages () {
 	$query = "SELECT messages.id, first_name, last_name, message, messages.created_at FROM messages 
 			LEFT JOIN users ON messages.user_id = users.id 

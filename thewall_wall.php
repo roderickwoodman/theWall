@@ -28,7 +28,7 @@ include('thewall_process.php');
 			padding: 10px;
 		}
 		form {
-			margin: 10px 0;
+			/*margin: 10px 0;*/
 		}
 		.error {
 			color: red;
@@ -48,7 +48,14 @@ include('thewall_process.php');
 			margin-top: 5px;
 			padding: 5px 10px;	
 		}
-		#header {
+		
+/*		#header {background-color:rgb(216,219,212); border-bottom: 5px solid black; margin-bottom:30px; padding:10px;}
+		#header_title {width:30%; text-align:left; display:inline-block; padding: 5px 10px; font-weight:700; font-size:1.5em;}
+		#header_user {width: 55%; text-align:right; vertical-align:bottom; display: inline-block; padding: 0 5px 12px 5px;}
+		#header form {display:inline-block; width: 10%;}
+*/
+
+/*		#header {
 			background-color: rgb(216,219,212);
 			border-bottom: 5px solid black;
 			margin-bottom: 30px;
@@ -73,7 +80,10 @@ include('thewall_process.php');
 			display: inline-block;
 			width: 10%;
 			text-align:;
-		}
+		}*/
+
+
+
 		#nonheader {
 			padding: 20px;
 		}
@@ -94,14 +104,9 @@ include('thewall_process.php');
 </head>
 <body>
 	<div id="wrapper">
-		<div id="header">
-			<p id="header_title">CodingDojo Wall</p>
-			<p id="header_user">Welcome, <?= $_SESSION['first_name'] ?></p>
-			<form action="thewall_process.php" action="thewall_process.php" method="post">
-				<input type="hidden" name="action" value="logout">
-				<input type="submit" value="log out">
-			</form>
-		</div>
+		<?php
+			add_header_region();
+		?>
 		<div id="nonheader">
 			<form class="message_region" action="thewall_process.php" method="post">
 				<input type="hidden" name="action" value="post_message">

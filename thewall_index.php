@@ -1,6 +1,6 @@
 <?php
 session_start();
-// var_dump($_SESSION);
+include('thewall_process.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +13,14 @@ session_start();
 			padding: 0;
 			font-family: sans-serif;
 		}
+		h2 {
+			padding-bottom: 20px;
+		}
 		form {
 			width: 325px;
 			padding: 10px;
 			border: 1px solid gray;
-			margin-bottom: 50px;
+			margin: 0 50px 70px 50px;
 		}
 		label {
 			display: inline-block;
@@ -37,8 +40,8 @@ session_start();
 			font-weight: 700;
 			border: 2px solid black;
 		}
-		#wrapper {
-			margin: 50px;
+		#nonheader {
+			padding: 50px;
 		}
 		.error {
 			color: red;
@@ -51,41 +54,46 @@ session_start();
 <body>
 	<div id="wrapper">
 		<?php
-			if(isset($_SESSION['errors'])) {
-				foreach ($_SESSION['errors'] as $error) {
-					echo "<p class='error'>{$error} </p>";
-				}
-				unset($_SESSION['errors']);
-			}
-			if(isset($_SESSION['success_message'])) {
-				echo "<p class='success'>{$_SESSION['success_message']} </p>";
-				unset($_SESSION['success_message']);
-			}
+			add_header_region();
 		?>
-		<h2>Register</h2>
-		<form action="thewall_process.php" method="post">
-			<input type="hidden" name="action" value="register"><br>
-			<label for="first_name">First name:</label> 
-			<input type="text" name="first_name"><br>
-			<label for="last_name">Last name:</label> 
-			<input type="text" name="last_name"><br>
-			<label for="email">Email address:</label> 
-			<input type="text" name="email"><br>
-			<label for="password">Password:</label> 
-			<input type="text" name="password"><br>
-			<label for="confirm_password">Confirm Password:</label> 
-			<input type="text" name="confirm_password"><br>
-			<input type="submit" value="register">
-		</form>
-		<h2>Login</h2>
-		<form action="thewall_process.php" method="post">
-			<input type="hidden" name="action" value="login"><br>
-			<label for="email">Email address:</label> 
-			<input type="text" name="email"><br>
-			<label for="password">Password:</label> 
-			<input type="password" name="password"><br>
-			<input type="submit" value="login">
-		</form>
+		<div id="nonheader">
+			<?php
+				if(isset($_SESSION['errors'])) {
+					foreach ($_SESSION['errors'] as $error) {
+						echo "<p class='error'>{$error} </p>";
+					}
+					unset($_SESSION['errors']);
+				}
+				if(isset($_SESSION['success_message'])) {
+					echo "<p class='success'>{$_SESSION['success_message']} </p>";
+					unset($_SESSION['success_message']);
+				}
+			?>
+			<h2>Register</h2>
+			<form action="thewall_process.php" method="post">
+				<input type="hidden" name="action" value="register"><br>
+				<label for="first_name">First name:</label> 
+				<input type="text" name="first_name"><br>
+				<label for="last_name">Last name:</label> 
+				<input type="text" name="last_name"><br>
+				<label for="email">Email address:</label> 
+				<input type="text" name="email"><br>
+				<label for="password">Password:</label> 
+				<input type="text" name="password"><br>
+				<label for="confirm_password">Confirm Password:</label> 
+				<input type="text" name="confirm_password"><br>
+				<input type="submit" value="register">
+			</form>
+			<h2>Login</h2>
+			<form action="thewall_process.php" method="post">
+				<input type="hidden" name="action" value="login"><br>
+				<label for="email">Email address:</label> 
+				<input type="text" name="email"><br>
+				<label for="password">Password:</label> 
+				<input type="password" name="password"><br>
+				<input type="submit" value="login">
+			</form>
+		</div>
 	</div>
 </body>
 </html>
