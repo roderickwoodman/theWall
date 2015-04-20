@@ -85,7 +85,7 @@ function logout_user() {
 function add_header_region() {
 
 	$style_header = "min-height:50px; background-color:rgb(216,219,212); border-bottom: 5px solid black; margin-bottom:30px; padding:10px;";
-	$style_header_title = "width:30%; text-align:left; display:inline-block; padding: 5px 10px; font-weight:700; font-size:1.5em";
+	$style_header_title = "width:30%; text-align:left; display:inline-block; padding: 15px 10px 5px 10px; font-weight:700; font-size:1.5em";
 	$style_header_user = "width: 55%; text-align:right; vertical-align:bottom; display: inline-block; padding: 0 15px 3px 5px;";
 	$style_header_form = "display:inline-block; width: 10%;";
 
@@ -100,13 +100,6 @@ function add_header_region() {
 		}
 	echo '</div>';
 }
-
-		#header {style="background-color:rgb(216,219,212); border-bottom: 5px solid black; margin-bottom:30px; padding:10px;"}
-		#header_title {style="width:30%; text-align:left; display:inline-block; padding: 5px 10px; font-weight:700; font-size:1.5em;"}
-		#header_user {style="width: 55%; text-align:right; vertical-align:bottom; display: inline-block; padding: 0 5px 12px 5px;"}
-		#header form {style="display:inline-block; width: 10%;"}
-
-
 
 function fetch_all_messages () {
 	$query = "SELECT messages.id, first_name, last_name, message, messages.created_at FROM messages 
@@ -133,7 +126,7 @@ function add_comment_box ($message_id) {
 		echo '<input type="hidden" name="action" value="post_comment">';
 		echo '<input type="hidden" name="message_id" value="'.$message_id.'">';
 		echo '<label for="comment_box">Post a comment</label>';
-		echo '<textarea cols=60 rows=3 name="comment_box" cols="30" rows="10"></textarea>';
+		echo '<textarea cols=100 rows=5 name="comment_box" cols="30" rows="10"></textarea>';
 		echo '<input type="submit" value="Post a comment">';
 	echo '</form>';
 }

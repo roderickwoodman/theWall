@@ -17,7 +17,7 @@ include('thewall_process.php');
 			padding-bottom: 20px;
 		}
 		form {
-			width: 325px;
+			width: 525px;
 			padding: 10px;
 			border: 1px solid gray;
 			margin: 0 50px 70px 50px;

@@ -21,15 +21,16 @@ include('thewall_process.php');
 		}
 		textarea {
 			display: block;
+			border: 3px solid black;
 		}
-		li {
-			border-top: 1px solid black;
-			width: 500px;
+		li.indent {
+			/*border-bottom: 1px solid black;*/
+			/*width: 500px;*/
 			padding: 10px;
 		}
-		form {
-			/*margin: 10px 0;*/
-		}
+/*		li.indent:last_child {
+			border-bottom: none;
+		}*/
 		.error {
 			color: red;
 		}
@@ -42,63 +43,35 @@ include('thewall_process.php');
 		}
 		input[type="submit"] {
 			display: inline-block;
-			border: 2px solid black;
+			border: 3px solid black;
 			border-radius: 5px;		
 			font-weight: 700;
 			margin-top: 5px;
 			padding: 5px 10px;	
 		}
-		
-/*		#header {background-color:rgb(216,219,212); border-bottom: 5px solid black; margin-bottom:30px; padding:10px;}
-		#header_title {width:30%; text-align:left; display:inline-block; padding: 5px 10px; font-weight:700; font-size:1.5em;}
-		#header_user {width: 55%; text-align:right; vertical-align:bottom; display: inline-block; padding: 0 5px 12px 5px;}
-		#header form {display:inline-block; width: 10%;}
-*/
-
-/*		#header {
-			background-color: rgb(216,219,212);
-			border-bottom: 5px solid black;
-			margin-bottom: 30px;
-			padding: 10px;
-		}
-		#header_title {
-			width: 30%;
-			text-align: left;
-			display: inline-block;
-			padding: 5px 10px;
-			font-weight: 700;
-			font-size: 1.5em;
-		}
-		#header_user {
-			width: 55%;
-			text-align: right;
-			vertical-align: bottom;
-			display: inline-block;
-			padding: 0 5px 12px 5px;
-		}
-		#header form {
-			display: inline-block;
-			width: 10%;
-			text-align:;
-		}*/
-
-
-
 		#nonheader {
 			padding: 20px;
 		}
-		.header_region input[type="submit"] {
-			/*width: 35%;*/
+		#header input[type="subit"] {
+			margin: 5px 0 20px 400px;
 		}
 		.message_region input[type="submit"] {
+			margin: 15px 0 20px 550px;
 			background-color: rgb(36,140,216);
 		}
 		.comment_region input[type="submit"] {
+			margin: 15px 0 20px 440px;
 			background-color: rgb(186,226,88);
 			color: black;
 		}
 		.indent {
-			margin-left: 50px;
+			margin: 0 0 0 50px;
+		}
+		form.comment_region {
+			padding-top: 20px;
+		}
+		#nonheader > ul > li {
+			margin-bottom: 20px;
 		}
 	</style>
 </head>
@@ -111,7 +84,7 @@ include('thewall_process.php');
 			<form class="message_region" action="thewall_process.php" method="post">
 				<input type="hidden" name="action" value="post_message">
 				<label for="post_box">Post a message</label>
-				<textarea cols=60 rows=3 name="post_box" cols="30" rows="10"></textarea>
+				<textarea cols=120 rows=8 name="post_box" cols="30" rows="10"></textarea>
 				<input type="submit" value="Post a message">
 			</form>
 			<ul>
