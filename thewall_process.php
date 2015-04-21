@@ -47,8 +47,14 @@ function register_user($post) {
 		die();
 	}
 	else {
+
+		global $connection;
+		$esc_first_name = mysqli_real_escape_string($connection, $post['first_name']);
+		$esc_last_name = mysqli_real_escape_string($connection, $post['last_name']);
+		$esc_password = mysqli_real_escape_string($connection, $post['password']);
+		$esc_email = mysqli_real_escape_string($connection, $post['email']);
 		$query = "INSERT INTO users (first_name, last_name, password, email, created_at, updated_at)
-				  VALUES ('{$post['first_name']}', '{$post['last_name']}', '{$post['password']}', '{$post['email']}',
+				  VALUES ('{$esc_first_name}', '{$esc_last_name}', '{$esc_password}', '{$esc_email}',
 				  	NOW(), NOW())";
 		run_mysql_query($query);
 		$_SESSION['success_message'] = "User successfully created!";
@@ -115,8 +121,10 @@ function fetch_all_comments ($message_id) {
 }
 
 function post_message($post) {
+	global $connection;
+	$esc_post_box = mysqli_real_escape_string($connection, $post['post_box']);
 	$query = "INSERT INTO messages (message, user_id, created_at, updated_at)
-			  VALUES ('{$post['post_box']}', '{$_SESSION['user_id']}', NOW(), NOW())";
+			  VALUES ('{$esc_post_box}', '{$_SESSION['user_id']}', NOW(), NOW())";
 	run_mysql_query($query);
 	header("location: thewall_wall.php");
 }
@@ -132,8 +140,10 @@ function add_comment_box ($message_id) {
 }
 
 function post_comment($post) {
+	global $connection;
+	$esc_comment_box = mysqli_real_escape_string($connection, $post['comment_box']);
 	$query = "INSERT INTO comments (comment, user_id, message_id, created_at, updated_at)
-			  VALUES ('{$post['comment_box']}', '{$_SESSION['user_id']}', '{$post['message_id']}', NOW(), NOW())";
+			  VALUES ('{$esc_comment_box}', '{$_SESSION['user_id']}', '{$post['message_id']}', NOW(), NOW())";
 	run_mysql_query($query);
 	header("location: thewall_wall.php");
 }
